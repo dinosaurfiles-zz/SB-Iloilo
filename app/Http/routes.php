@@ -20,5 +20,9 @@ Route::group(['middleware' => 'web'], function (){
 
 	Route::get('/home', 'HomeController@index');
 
+	// Route::resource('project', 'ProjectsController');
+
+	Route::get('project', 'ProjectsController@index')->middleware('auth');
+	Route::resource('project', 'ProjectsController');
 });
 

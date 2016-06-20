@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use App\Project;
+
+use Auth;
+
 class ProjectsController extends Controller
 {
     public function __construct(){
@@ -19,7 +23,9 @@ class ProjectsController extends Controller
      */
     public function index()
     {
-        //
+        $projects = Project::orderBy('id', 'desc')->get();
+
+        return view('projects.index', compact('projects'));
     }
 
     /**
@@ -29,7 +35,7 @@ class ProjectsController extends Controller
      */
     public function create()
     {
-        //
+        return view('projects.create');
     }
 
     /**
@@ -40,7 +46,36 @@ class ProjectsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required|min:10|max:255',
+            'description' => 'required|min:10',
+            'status' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'image' => 'image|mimes:jpeg,jpg,png,bmp,gif,svg'
+        ]);
+
+
+        $project = new Project([
+            'title' => $request->title,
+            'user_id' => Auth::id() ,
+            'description' => $request->description,
+            'status' => $request->status,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+        ]);
+
+        $project->save();
+
+        if ($request->image) {
+            $imageName = 'project-' . $project->id . '.' . $request->file('image')->getClientOriginalExtension();
+            $request->file('image')->move(base_path() . '/public/images/projects/', $imageName);
+
+            $project->image = $imageName;
+            $project->save();
+        }
+
+        return redirect()->action('ProjectsController@index');
     }
 
     /**
@@ -49,9 +84,9 @@ class ProjectsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Project $project)
     {
-        //
+        return view('projects.view', compact('project'));
     }
 
     /**
@@ -62,7 +97,7 @@ class ProjectsController extends Controller
      */
     public function edit($id)
     {
-        //
+        return 'edit';
     }
 
     /**
