@@ -5,28 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
-
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
+    <title>Santa Barbara Project Page - @yield('title')</title>
 
     <!-- Styles -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="{!! URL::asset('css/bootstrap.min.css') !!}">
+    <link rel="stylesheet" href="{!! URL::asset('css/project.css') !!}">
+    <link rel="stylesheet" href="{!! URL::asset('fonts/font-awesome.min.css') !!}">
+    {{-- <link rel="stylesheet" href="{!! URL::asset('css/bootstrap-theme.min.css') !!}"> --}}
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
     <style>
-        body {
-            font-family: 'Lato';
-        }
-
         .fa-btn {
             margin-right: 6px;
         }
     </style>
 </head>
-<body id="app-layout">
-    <nav class="navbar navbar-default navbar-static-top">
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
 
@@ -39,27 +34,50 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    Laravel
+                <a class="navbar-brand" href="{{ url('/home') }}">
+                    Santa Barbara Project DB
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">Home</a></li>
+                    
                 </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
+                    @if(Auth::user())
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Project<span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{{ action('ProjectsController@index') }}"><i class="fa fa-btn fa-home"></i>Project Home</a></li>
+                            <li><a href="{{ action('ProjectsController@create') }}"><i class="fa fa-btn fa-plus"></i>New Project</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        {!! Form::open(array('action' => array('ProjectsController@search'), 'method' => 'POST', 'class' => 'navbar-form', 'role' => 'search')) !!}
+                            <div class="input-group">
+                                {!! Form::text('search', null ,array('class' => 'form-control', 'placeholder' => 'Search For..')) !!}
+                                <span class="input-group-btn">
+                                    {!! Form::submit('Search!', array('class' => 'btn btn-default')) !!}
+                                </span>
+                            </div><!-- /input-group -->
+                        {!! Form::close() !!}
+                    </li>
+                    @endif
+
                     @if (Auth::guest())
                         <li><a href="{{ url('/login') }}">Login</a></li>
                         <li><a href="{{ url('/register') }}">Register</a></li>
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                                {{ Auth::user()->username }} <span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
@@ -74,9 +92,13 @@
 
     @yield('content')
 
+
+    <footer style="height: 300px">
+
+    </footer>
     <!-- JavaScripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{!! URL::asset('js/jquery-2.2.4.min.js') !!}"></script>
+    <script type="text/javascript" src="{!! URL::asset('js/bootstrap.min.js') !!}"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>
 </html>

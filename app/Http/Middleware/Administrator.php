@@ -15,6 +15,11 @@ class Administrator
      */
     public function handle($request, Closure $next)
     {
+        // if (!Auth::guard($guard)->check()) {
+        //     return redirect('/');
+        // }
+
+        // return $next($request);
         $user = $request->user();
 
         if ($user && $user->user_type == '0'){

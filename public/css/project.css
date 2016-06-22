@@ -1,0 +1,210 @@
+.navbar{
+	background-color: #444B55;
+}
+
+.navbar a {
+	color: white !important;
+}
+
+.navbar-default {
+	border-color: #444B55 !important;
+}
+
+.dropdown-toggle {
+	background-color: #444B55 !important;
+}
+
+a:hover {
+	color: #71C4D0 !important;
+}
+
+.dropdown-menu {
+	background-color: #47B3D7 !important;	
+}
+
+.dropdown-menu > li > a {
+	color: white !important;
+}
+
+.container-fluid-home {
+	padding: 0px 0px; 
+	height: 500px; 
+	width: 100%;
+    background-image: url('../images/home.jpeg');
+    background-size: 100%;
+}
+
+.project-title, .project-title > a, .project-author > a{
+	color: #505C70 !important;
+}
+
+.project-title > a:hover, .project-author > a:hover{
+	color: #71C4D0 !important;
+}
+
+.project-details {
+	color: #505C70 !important;
+}
+
+.project-details .dropdown-toggle {
+	background-color: white !important;
+}
+
+.announcement-dropdown > .dropdown-toggle{
+	background-color: white !important;
+}
+
+.profile-div{
+	display: -webkit-box;
+	  display: -moz-box;
+	  display: -ms-flexbox;
+	  display: -webkit-flex;
+	  display: flex; 
+  
+  /* Align the bootstrap's container vertically */
+    -webkit-box-align : center;
+  -webkit-align-items : center;
+       -moz-box-align : center;
+       -ms-flex-align : center;
+          align-items : center;
+}
+
+.profile-image{
+	max-width: 200px;
+}
+
+.profile-username{
+	margin-left: 20px;	
+}
+
+.btn-link{
+	color: white !important;
+}
+
+.btn-link-comment{
+	color: #337ab7 !important;	
+}
+
+.dropdown-menu > li > a:hover , .btn-link:hover{
+	background-color: white;
+	text-decoration: underline;
+	color: #47B3D7 !important;
+}
+
+.home-center-div{
+	margin-top: 80px; 
+	color: white; 
+	text-align: center; 
+	text-shadow: 3px 2px 3px black;
+}
+
+.home-center-div img {
+	width: 140px; 
+	height: 140px;
+}
+
+.home-center-down-button{
+	background-color: #47B3D7; 
+	color: white; 
+	border-radius: 0px; 
+	border: #47B3D7;
+}
+
+.home-center-down-button:hover {
+	background-color: white;
+	color: #47B3D7;
+	text-shadow: none;
+}
+
+.card{
+	background-color: #F5F5F5;
+}
+
+img.card-img-top {
+	border-radius: 5px 5px 0px 0px; 
+	max-width: 350px;
+}
+
+.card-block {
+	padding: 10px 20px 20px 20px;
+}
+
+.project-date-submitted {
+	font-size: 16px; 
+	display: inline-block; 
+	text-align: center; 
+	padding: 5px 10px; 
+	font-size: 26px;
+	font-weight: 800; 
+	background: #818fa5; 
+	color: white;
+}
+
+.date-day {
+	display: block;
+}
+
+.date-month{
+	font-weight: 100;
+}
+
+.project-author{
+	margin-top: 10px;
+}
+
+.project-details > ul {
+	margin-top: -5px;
+}
+
+.project-image {
+	margin-bottom: 20px;
+}
+
+.view-details{
+	padding-bottom: 20px;
+	border-bottom: 2px #CCCCCC solid; 
+	margin-bottom: 30px;
+	font-size: 16px;
+}
+
+.comment-div {
+	padding: 0px 10px 0px 0px;
+}
+
+.comment-box {
+	border: 1px #CCCCCC solid; 
+	padding-bottom: 15px; 
+	border-radius: 5px;
+}
+
+.comment-btn {
+	margin-right: 15px;
+}
+
+.announcement {
+	margin-top: 70px;
+}
+
+.announcement-heading {
+	text-align: center;
+}
+
+.announcement-list {
+	text-align: left;
+}
+
+.announcement-new {
+	text-align: center;
+}
+
+.announcement-dropdown-menu {
+	margin-top: 20px;
+}
+
+
+
+
+
+
+
+

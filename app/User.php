@@ -21,6 +21,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'first_name', 'last_name','id', 'email', 'user_type' ,'password', 'remember_token',
     ];
+
+    public function projects ()
+    {
+        return $this->hasMany('App\Project');
+    }
 }

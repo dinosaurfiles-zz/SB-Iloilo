@@ -13,7 +13,8 @@ use Auth;
 class ProjectsController extends Controller
 {
     public function __construct(){
-        $this->middleware('admin');
+        $this->middleware('auth');
+        // $this->middleware('admin', ['except' => 'index', 'show']);
     }
 
     /**
@@ -95,9 +96,9 @@ class ProjectsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Project $project)
     {
-        return 'edit';
+        return view('projects.edit', compact('project'));
     }
 
     /**
@@ -107,9 +108,34 @@ class ProjectsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Project $project)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required|min:10|max:255',
+            'description' => 'required|min:10',
+            'status' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'image' => 'image|mimes:jpeg,jpg,png,bmp,gif,svg'
+        ]);
+
+        $project->title = $request->title;
+        $project->description = $request->description;
+        $project->status = $request->status;
+        $project->start_date = $request->start_date;
+        $project->end_date = $request->end_date;
+
+        $project->save();
+
+        if ($request->image) {
+            $imageName = 'project-' . $project->id . '.' . $request->file('image')->getClientOriginalExtension();
+            $request->file('image')->move(base_path() . '/public/images/projects/', $imageName);
+
+            $project->image = $imageName;
+            $project->save();
+        }
+
+        return redirect()->action('ProjectsController@show', ['project' => $project->id]);
     }
 
     /**
@@ -118,8 +144,17 @@ class ProjectsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Project $project)
     {
-        //
+        $project->delete();
+
+        return redirect()->action('ProjectsController@index');
+    }
+
+    public function search(Request $request){
+        $search_string = $request->search;
+        $search_results = Project::where('description', 'like', '%'.$search_string.'%')->orWhere('title', 'like', '%'.$search_string.'%')->get();
+
+        return view('projects.search', compact('search_string', 'search_results'));
     }
 }

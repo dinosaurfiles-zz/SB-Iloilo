@@ -13,16 +13,22 @@
 
 Route::group(['middleware' => 'web'], function (){
 	Route::get('/', function () {
-		return view('welcome');
+		return view('home');
 	});
 
 	Route::auth();
-
+	
 	Route::get('/home', 'HomeController@index');
 
-	// Route::resource('project', 'ProjectsController');
+	Route::get('profile/{profile}', 'ProfilesController@show');
+	// Route::post('profile', 'ProfilesController@update');
 
-	Route::get('project', 'ProjectsController@index')->middleware('auth');
+	Route::post('project/search', 'ProjectsController@search');
+
 	Route::resource('project', 'ProjectsController');
-});
 
+	Route::group(['prefix' => 'project/{project}'], function () {
+	    Route::resource('announcement', 'AnnouncementsController');
+	    Route::resource('comment', 'CommentsController');
+	});
+});
