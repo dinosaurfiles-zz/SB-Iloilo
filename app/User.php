@@ -21,7 +21,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'first_name', 'last_name','id', 'email', 'user_type' ,'password', 'remember_token',
+        'id', 'email', 'user_type' ,'password', 'remember_token',
     ];
 
     public function projects ()

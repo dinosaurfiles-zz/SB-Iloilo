@@ -18,7 +18,12 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <i class="fa fa-cog"></i> Options <span class="caret"></span></a>
                 <ul class="dropdown-menu dropdown-menu-right" role="menu">
                     <li><a href="{!! action('ProjectsController@edit', ['project' => $project->id]) !!}" ><i class="fa fa-btn fa-pencil-square-o"></i>Edit Project</a></li>
-                    <li><a href="#"><i class="fa fa-btn fa-trash-o"></i>Delete Project</a></li>
+                    <li>
+                        {!! Form::open(array('action' => array('ProjectsController@destroy', 'project' => $project->id), 'method' => 'DELETE')) !!}
+                            <button class="btn-link" role="button" type="submit"><i class="fa fa-btn fa-trash-o"></i>Delete Project</button>
+                        {!! Form::close() !!}
+                    </li>
+                    {{-- <li><a href="#"><i class="fa fa-btn fa-trash-o"></i>Delete Project</a></li> --}}
                 </ul>
             </li>
             @endif
@@ -58,11 +63,11 @@
                         <ul class="list-inline pull-right">
 
                             @if($comment->user_id == Auth::id())
-                            <li class="post-author"><a href="{!! action('CommentsController@edit', ['project' => $project->id, 'announcement' => $comment->id]) !!}"><i class="fa fa-pencil-square-o"></i> Edit</a>
+                            <li><a href="{!! action('CommentsController@edit', ['project' => $project->id, 'announcement' => $comment->id]) !!}"><i class="fa fa-pencil-square-o"></i> Edit</a>
                             </li>
                             @endif
 
-                            <li class="post-author">
+                            <li>
                                 {!! Form::open(array('action' => array('CommentsController@destroy', 'project' => $project->id, 'comment' => $comment->id), 'method' => 'DELETE')) !!}
                                     <button class="btn-link btn-link-comment" role="button" type="submit"><i class="fa fa-trash-o"></i> Delete</button>
                                 {!! Form::close() !!}
@@ -82,7 +87,7 @@
     </div>
 
     <div class="col-md-3 announcement">
-    <div style="border-bottom: 1px #CCCCCC solid;">
+    <div class="announcement-div">
         <div class="panel panel-primary" >
             <div class="panel-heading announcement-heading">
                 Announcements
@@ -125,18 +130,32 @@
 
 
         <div class="project-members-div">
-            <h3 style="margin-bottom: 20px">Project Members: </h3>
+            <h3 class="project-members">Project Members: </h3>
             <ul class="list-unstyled">
-                <li style="display: flex; margin-bottom: 20px" >
+                
+            @foreach ($project->members as $member)
+                <li style="" class="project-members-member" >
                     <img class="img-circle" src="{!! URL::asset('images/avatar.jpg') !!}" alt="..." style="height: 48px">
-                    <div style="margin: 0px 0px 0px 5px ">
-                    <h4 style="margin: 0px">FName LName <small>username</small></h4>
-                    <p>Project Leader</p>
+                    <div>
+                    <h4>{!! $member->user['first_name'] . ' ' . $member->user['last_name'] !!} <small>{!! $member->user['username'] !!}</small></h4>
+                    <p>{!! $member->role !!}</p>
+
+                    @if ($project->user_id == Auth::id())
+                    {!! Form::open(array('action' => array('MembersController@destroy', 'project' => $project, 'member' => $member), 'method' => 'DELETE')) !!}
+                        <button class="btn btn-danger btn-xs"><i class="fa fa-btn fa-trash-o"></i>Remove Member</button>
+                    {!! Form::close() !!}
                     </div>
+                    @endif
                 </li>
-                <li style="text-align: center">
-                    <a href="#" class="btn btn-primary"><i class="fa fa-btn fa-plus-square-o"></i>Add New Project Member</a>
+            @endforeach
+                @if ($project->user_id == Auth::id())
+                <li class="project-members-option-list">
+                    {!! Form::open(array('action' => array('MembersController@search', $project->id), 'method' => 'POST', 'class' => 'form-inline col-md-offset-1')) !!}
+
+                        <button class="btn btn-primary"><i class="fa fa-btn fa-plus-square-o"></i>Add New Project Member</button>
+                    {!! Form::close() !!}
                 </li>
+                @endif
             </ul>
         </div>
     </div>

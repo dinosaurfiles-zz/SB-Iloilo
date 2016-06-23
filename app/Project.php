@@ -25,8 +25,11 @@ class Project extends Model
 
     public function members ()
     {
-        return 
-        // return $this->hasMany('App\Member', 'project_id', 'id');
+        // return $this->hasManyThrough(
+        //     User::class, Member::class,
+        //     'member_id', 'user_id', 'id'
+        // );
+        return $this->hasMany('App\Member', 'project_id', 'id');
 
         //select `users`.*, `members`.`project_id` from `users` inner join `members` on `members`.`member_id` = `users`.`id` where `members`.`project_id` = 1
     }

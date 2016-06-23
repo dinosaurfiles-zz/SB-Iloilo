@@ -79,6 +79,7 @@ a:hover {
 
 .btn-link{
 	color: white !important;
+	width: 100%;
 }
 
 .btn-link-comment{
@@ -201,10 +202,70 @@ img.card-img-top {
 	margin-top: 20px;
 }
 
+.search-project-title, .add-member-title {
+	text-align: center;
+}
+
+.search-results{
+	border-bottom: 2px #CCCCCC solid; 
+	margin-bottom: 40px;
+}
+
+.search-project-title > span {
+	text-decoration: underline;
+}
+
+.add-member-input-group {
+	width: 100%;
+}
+
+.add-member-input-group span {
+	width: none !important;
+}
 
 
+.add-member-users {
+	margin-top: 30px; 
+	display: flex
+}
 
+.add-member-users img {
+	height: 100px;
+}
 
+.add-member-users h4{
+	margin: 0px;
+}
 
+.add-member-users button {
+	margin-top: 10px;
+}
 
+.add-member-users > div {
+	margin: 0px 0px 0px 5px;
+}
 
+.announcement-div {
+	border-bottom: 1px #CCCCCC solid;
+}
+
+.project-members {
+	margin-bottom: 20px;
+}
+
+.project-members-member {
+	display: flex; 
+	margin-bottom: 20px;
+}
+
+.project-members-member > div {
+	margin: 0px 0px 0px 5px !important;
+}
+
+.project-members-member > h4 {
+	margin: 0px
+}
+
+.project-members-option-list {
+	text-align: center;
+}

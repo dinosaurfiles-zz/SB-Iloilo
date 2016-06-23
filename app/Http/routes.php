@@ -30,5 +30,8 @@ Route::group(['middleware' => 'web'], function (){
 	Route::group(['prefix' => 'project/{project}'], function () {
 	    Route::resource('announcement', 'AnnouncementsController');
 	    Route::resource('comment', 'CommentsController');
+	    Route::post('searchmembers', 'MembersController@search');
+		Route::post('member', 'MembersController@store');
+		Route::delete('member/{member}', 'MembersController@destroy');
 	});
 });
