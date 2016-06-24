@@ -5,6 +5,13 @@
 {{-- http://themes.3rdwavemedia.com/devstudio/blog.html --}}
 
 <div class="container" style="margin-top: 60px">
+    @if ($errors->has('content'))
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Warning!</strong> {!! $errors->first('content') !!}
+    </div>
+    @endif
+
     <div class="col-md-9">
         <h1 class="project-title">{!! $project->title !!}</h1>
         <ul class="list-inline project-details">
@@ -37,12 +44,12 @@
 
         <div class="comment-div">
         <h3>Comments:</h3>
-
             {!! Form::open(array('action' => array('CommentsController@store', $project->id), 'method' => 'POST' , 'class' => 'comment-box')) !!}
                 <div class="form-group">
                     {!! Form::textarea('content', null, array('class' => 'form-control', 'rows' => '3')) !!}
                     {{-- <textarea class="form-control" rows="3"></textarea> --}}
                 </div>
+                
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary pull-right comment-btn">Comment</button>
                 </div>

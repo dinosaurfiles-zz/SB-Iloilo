@@ -11,6 +11,12 @@
 |
 */
 
+use App\Role;
+
+use App\User;
+
+use App\Permission;
+
 Route::group(['middleware' => 'web'], function (){
 	Route::get('/', function () {
 		return view('home');
@@ -33,5 +39,43 @@ Route::group(['middleware' => 'web'], function (){
 	    Route::post('searchmembers', 'MembersController@search');
 		Route::post('member', 'MembersController@store');
 		Route::delete('member/{member}', 'MembersController@destroy');
+	});
+
+	// Route::get('/rolesandpermissions', function()
+	// {
+	// 	$userRole = Role::where('name', '=', 'user')->first();
+	// 	$adminRole = Role::where('name', '=', 'admin')->first();
+
+	// 	$user = User::where('username', '=', 'admin123')->first();
+	// 	$user->attachRole($adminRole);
+
+	// 	$createPost = Permission::where('name', '=', 'create-post')->first();
+	// 	$viewPost = Permission::where('name', '=', 'view-post')->first();
+	// 	// $createPost->name         = 'create-post';
+	// 	// $createPost->display_name = 'Create Posts'; // optional
+	// 	// $createPost->description  = 'create new blog posts'; // optional
+	// 	// $createPost->save();
+
+	// 	// $viewPost = new Permission();
+	// 	// $viewPost->name = 'view-post';
+	// 	// $viewPost->display_name = 'View Posts';
+	// 	// $viewPost->description = 'view posts lol';
+	// 	// $viewPost->save();
+
+	// 	$adminRole->attachPermissions(array($createPost, $viewPost));
+	// 	$userRole->attachPermission($viewPost);
+	// });
+
+	Route::get('/testpermissions', function()
+	{
+		if  (Entrust::hasRole('admin'))
+		{
+			echo "Yes";
+		}else
+		{
+			echo "No";
+		}
+
+		dd('test');
 	});
 });

@@ -56,7 +56,9 @@
 
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ action('ProjectsController@index') }}"><i class="fa fa-btn fa-home"></i>Project Home</a></li>
+                            @if(Auth::user()->user_type == 0)
                             <li><a href="{{ action('ProjectsController@create') }}"><i class="fa fa-btn fa-plus"></i>New Project</a></li>
+                            @endif
                         </ul>
                     </li>
                     <li>
@@ -92,31 +94,9 @@
 
     @yield('content')
 
-    <div class="container-fluid" style="margin-top: 80px; padding: 0px !important; display: flex; background-color: #444B55; height: 250px; text-align: center; color: white">
-            <div class="col-md-4">
-                <h3>Brought to you by: <a href="https://github.com/dinosaurfiles">dinosaurfiles</a></h3>
-                <br>
-                <h4>We need help in designing the website! Follow the project <span class="fa fa-arrow-down"></span></h4>
-                <a href="https://github.com/dinosaurfiles/SB-Iloilo"><h1><span class="fa fa-github"></span> SB-Iloilo Project</h1></a>
-            </div>
-            <div class="col-md-4">
-                <h4>Contact us through our official media links!</h4>
-                <a href=""><h3><span class="fa fa-facebook-square"></span> Santa Barbara Iloilo</h3></a>
-                <a href=""><h3><span class="fa fa-youtube-square"></span> ExploreSantaBarbara</h3></a>
-                <a href=""><h3><span class="fa fa-twitter-square"></span> @sb-iloilo</h3></a>
-            </div>
-            <div class="col-md-4">
-                <iframe
-                    width="400"
-                    height="240"
-                    frameborder="0" style="border:0"
-                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDkm875PwOcQaP4My0LtHjqDVSGS904MTU
-                    &q=Santa+Barbara+Municipal+Hall" allowfullscreen>
-                </iframe>
-            </div>
-        </footer>
-
+    <div style="height: 100px">
     </div>
+
     <!-- JavaScripts -->
     <script type="text/javascript" src="{!! URL::asset('js/jquery-2.2.4.min.js') !!}"></script>
     <script type="text/javascript" src="{!! URL::asset('js/bootstrap.min.js') !!}"></script>

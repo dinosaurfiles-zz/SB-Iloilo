@@ -11,6 +11,9 @@
 				{!! Form::label('title', 'Title', array('class' => 'col-md-3 control-label')) !!}
 				<div class="col-md-9">
 					{!! Form::text('title', null ,array('class' => 'form-control', 'placeholder' => 'Project Title')) !!}
+				<span class="help-block has-error-span">
+		            <strong>{!! $errors->first('title') !!}</strong>
+		        </span>
 				</div>
 			</div>
 
@@ -18,6 +21,9 @@
 				{!! Form::label('description', 'Description', array('class' => 'col-md-3 control-label')) !!}
 				<div class="col-md-9">
 					{!! Form::textarea('description', null , array('class' => 'form-control', 'placeholder' => 'Project Description')) !!}
+				<span class="help-block has-error-span">
+		            <strong>{{ $errors->first('description') }}</strong>
+		        </span>
 				</div>
 			</div>
 
@@ -25,6 +31,9 @@
 				{!! Form::label('status', 'Status', array('class' => 'col-md-3 control-label')) !!}
 				<div class="col-md-9">
 					{!! Form::select('status', array('new' => 'New', 'ongoing' => 'Ongoing', 'complete' => 'Complete'), 'New', array('class' => 'form-control')) !!}
+				<span class="help-block has-error-span">
+		            <strong>{{ $errors->first('status') }}</strong>
+		        </span>
 				</div>
 			</div>
 
@@ -35,10 +44,16 @@
 						<div class="col-md-6">
 							{!! Form::label('start_date', 'Start Date', array('class' => 'control-label')) !!}
 							{!! Form::date('start_date', \Carbon\Carbon::now(), array('class' => 'form-control')) !!}
+							<span class="help-block has-error-span">
+					            <strong>{{ $errors->first('start_date') }}</strong>
+					        </span>
 						</div>
 						<div class="col-md-6">
 							{!! Form::label('end_date', 'End Date', array('class' => 'control-label')) !!}
 							{!! Form::date('end_date', \Carbon\Carbon::now(), array('class' => 'form-control')) !!}
+							<span class="help-block has-error-span">
+					            <strong>{{ $errors->first('end_date') }}</strong>
+					        </span>
 						</div>
 					</div>
 				</div>
@@ -48,6 +63,9 @@
 				{!! Form::label('image', 'Cover Photo', array('class' => 'col-md-3 control-label')) !!}
 				<div class="col-md-9">
 					{!! Form::file('image', array('style' => 'padding-top: 6px', 'files' => true)) !!}
+					<span class="help-block has-error-span">
+			            <strong>{{ $errors->first('image') }}</strong>
+			        </span>
 				</div>
 			</div>
 
@@ -60,14 +78,4 @@
 		{!! Form::close() !!}
 	</div>
 </div>
-	@if (count($errors) > 0)
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-	@endif
-
 @endsection

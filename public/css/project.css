@@ -269,3 +269,7 @@ img.card-img-top {
 .project-members-option-list {
 	text-align: center;
 }
+
+.has-error-span {
+	color: #D9534F;
+}

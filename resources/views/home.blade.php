@@ -51,4 +51,30 @@
         </div> 
     </div>
 </div>
+
+<div class="container-fluid" style="margin-top: 80px; padding: 0px !important; display: flex; background-color: #444B55; height: 250px; text-align: center; color: white">
+        <div class="col-md-4">
+            <h3>Brought to you by: <a href="https://github.com/dinosaurfiles">dinosaurfiles</a></h3>
+            <br>
+            <h4>We need help in designing the website! Follow the project <span class="fa fa-arrow-down"></span></h4>
+            <a href="https://github.com/dinosaurfiles/SB-Iloilo"><h1><span class="fa fa-github"></span> SB-Iloilo Project</h1></a>
+        </div>
+        <div class="col-md-4">
+            <h4 style="margin-top: 25px">Contact us through our official media links!</h4>
+            <a href=""><h3><span class="fa fa-facebook-square"></span> Santa Barbara Iloilo</h3></a>
+            <a href=""><h3><span class="fa fa-youtube-square"></span> ExploreSantaBarbara</h3></a>
+            <a href=""><h3><span class="fa fa-twitter-square"></span> @sb-iloilo</h3></a>
+        </div>
+        <div class="col-md-4">
+        <div style="margin: 10px 0px 0px 0px ">
+            <iframe
+                width="420"
+                height="230"
+                frameborder="0" style="border:0"
+                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDkm875PwOcQaP4My0LtHjqDVSGS904MTU
+                &q=Santa+Barbara+Municipal+Hall" allowfullscreen>
+            </iframe>
+        </div>
+        </div>
+    </div>
 @endsection
