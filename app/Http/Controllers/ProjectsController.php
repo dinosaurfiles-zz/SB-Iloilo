@@ -58,10 +58,10 @@ class ProjectsController extends Controller
 
 
         $project = new Project([
-            'title' => $request->title,
+            'title' => strip_tags($request->title),
             'user_id' => Auth::id() ,
-            'description' => $request->description,
-            'status' => $request->status,
+            'description' => strip_tags($request->description),
+            'status' => strip_tags($request->status),
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
         ]);
@@ -119,9 +119,9 @@ class ProjectsController extends Controller
             'image' => 'image|mimes:jpeg,jpg,png,bmp,gif,svg'
         ]);
 
-        $project->title = $request->title;
-        $project->description = $request->description;
-        $project->status = $request->status;
+        $project->title = strip_tags($request->title);
+        $project->description = strip_tags($request->description);
+        $project->status = strip_tags($request->status);
         $project->start_date = $request->start_date;
         $project->end_date = $request->end_date;
 
@@ -152,7 +152,7 @@ class ProjectsController extends Controller
     }
 
     public function search(Request $request){
-        $search_string = $request->search;
+        $search_string = strip_tags($request->search);
         $search_results = Project::where('description', 'like', '%'.$search_string.'%')->orWhere('title', 'like', '%'.$search_string.'%')->get();
 
         return view('projects.search', compact('search_string', 'search_results'));

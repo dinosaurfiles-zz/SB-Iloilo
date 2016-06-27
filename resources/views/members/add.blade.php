@@ -3,6 +3,11 @@
 
 @section('content')
 	<div class="container" style="margin-top: 60px">
+
+	@if($errors->any())
+		<h4>{{$errors->first()}}</h4>
+	@endif
+	
 		<div class="col-md-10 col-md-offset-1">
 			<h1 class="add-member-title">Add New Project Members</h1>
 			{!! Form::open(array('action' => array('MembersController@search', $project->id), 'method' => 'POST', 'class' => 'form-inline col-md-offset-1')) !!}

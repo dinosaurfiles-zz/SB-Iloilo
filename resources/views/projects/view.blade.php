@@ -38,7 +38,7 @@
         <img class="img-responsive project-image" src="{!! URL::asset('images/projects/' . $project->image ) !!}" alt="">
         <div class="view-details">
             <p class="project-details">
-                {!! nl2br(e($project->description)) !!}
+                {!! strip_tags(nl2br(e($project->description))) !!}
             </p>
         </div>
 
@@ -84,7 +84,7 @@
                     </small>
 
                     </h4>
-                    {!! $comment->content !!}
+                    {!! strip_tags($comment->content) !!}
                 </div>
             </div>
 
@@ -126,7 +126,7 @@
                             </ul>
                         </div>
                         @endif
-                        {!! date('F j',strtotime($announcement->created_at)) . ' - ' . $announcement->content !!}</li>
+                        {!! date('F j',strtotime($announcement->created_at)) . ' - ' . strip_tags($announcement->content) !!}</li>
                     @endforeach
                 @else
                     <li class="list-group-item">Empty</li>                            
@@ -139,9 +139,10 @@
         <div class="project-members-div">
             <h3 class="project-members">Project Members: </h3>
             <ul class="list-unstyled">
-                
+
+            @if (count($project->members) > 0)
             @foreach ($project->members as $member)
-                <li style="" class="project-members-member" >
+                <li class="project-members-member" >
                     <img class="img-circle" src="{!! URL::asset('images/avatar.jpg') !!}" alt="..." style="height: 48px">
                     <div>
                     <h4>{!! $member->user['first_name'] . ' ' . $member->user['last_name'] !!} <small>{!! $member->user['username'] !!}</small></h4>
@@ -155,6 +156,9 @@
                     @endif
                 </li>
             @endforeach
+            @else
+                <li><h4 style="text-align: center">Empty</h4></li>
+            @endif
                 @if ($project->user_id == Auth::id())
                 <li class="project-members-option-list">
                     {!! Form::open(array('action' => array('MembersController@search', $project->id), 'method' => 'POST', 'class' => 'form-inline col-md-offset-1')) !!}
@@ -163,6 +167,7 @@
                     {!! Form::close() !!}
                 </li>
                 @endif
+
             </ul>
         </div>
     </div>

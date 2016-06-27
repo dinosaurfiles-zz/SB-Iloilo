@@ -16,15 +16,18 @@ class MembersController extends Controller
 {
     public function store(Project $project, Request $request)
     {
-		if (! (Member::where('member_id', '=', $request->memberId)->where('project_id', '=', $project->id)->exists())) {
-			$member = new Member([
-	            'member_id' => $request->memberId,
-	            'project_id' => $project->id ,
-	            'role' => $request->role,
-	        ]);
+        if (! (Member::where('project_id', '=', $project->id)->where('role', '=', $request->role)->exists())){
+    		if (! (Member::where('member_id', '=', $request->memberId)->where('project_id', '=', $project->id)->exists())) {
+    			$member = new Member([
+                    'member_id' => $request->memberId,
+                    'project_id' => $project->id ,
+                    'role' => $request->role,
+                ]);
 
-	        $member->save();
-		}
+    	        $member->save();
+    		}
+        }
+
 		return redirect()->action('ProjectsController@show', ['project' => $project->id]);
     }
     

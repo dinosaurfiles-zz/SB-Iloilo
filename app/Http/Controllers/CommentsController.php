@@ -49,10 +49,9 @@ class CommentsController extends Controller
         $comment = new Comment([
             'project_id' => $project->id,
             'user_id' => Auth::id(),
-            'content' => $request->content,
+            'content' => strip_tags($request->content),
         ]);
 
-        // dd('store bitch');
         $comment->save();
 
         return redirect()->action('ProjectsController@show', ['project' => $project->id]);
@@ -89,7 +88,7 @@ class CommentsController extends Controller
      */
     public function update(Request $request, Project $project, Comment $comment)
     {
-        $comment->content = $request->content;
+        $comment->content = strip_tags($request->content);
         $comment->save();
 
         return redirect()->action('ProjectsController@show', ['project' => $project->id]);

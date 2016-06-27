@@ -49,7 +49,7 @@ class AnnouncementsController extends Controller
         $announcement = new Announcement([
             'project_id' => $project->id,
             'user_id' => Auth::id(),
-            'content' => $request->content,
+            'content' => strip_tags($request->content),
         ]);
 
         $announcement->save();
@@ -88,7 +88,7 @@ class AnnouncementsController extends Controller
      */
     public function update(Request $request, Project $project, Announcement $announcement)
     {
-        $announcement->content = $request->content;
+        $announcement->content = strip_tags($request->content);
         $announcement->save();
 
         return redirect()->action('ProjectsController@show', ['project' => $project->id]);
