@@ -11,12 +11,6 @@
 |
 */
 
-use App\Role;
-
-use App\User;
-
-use App\Permission;
-
 Route::group(['middleware' => 'web'], function (){
 	Route::get('/', function () {
 		return view('home');
@@ -33,13 +27,18 @@ Route::group(['middleware' => 'web'], function (){
 	Route::resource('project', 'ProjectsController');
 
 	Route::group(['prefix' => 'project/{project}'], function () {
-	    Route::resource('announcement', 'AnnouncementsController');
-	    Route::resource('comment', 'CommentsController');
-	    Route::post('searchmembers', 'MembersController@search');
+		Route::resource('announcement', 'AnnouncementsController');
+		Route::resource('comment', 'CommentsController');
+		Route::post('searchmembers', 'MembersController@search');
 		Route::post('member', 'MembersController@store');
 		Route::delete('member/{member}', 'MembersController@destroy');
 	});
-
-	Route::get('admindashboard', ['middleware' => ['permission:manage-admin'], 'uses' => 'AdminController@index']);
+	
+	Route::group(['prefix' => 'admin', 'middleware' => ['role:alphaadmin']], function() {
+		Route::get('initialize', 'AdminController@initialize');
+		Route::get('dashboard', 'AdminController@index');
+		Route::post('dashboard', 'AdminController@addAdmin');
+		Route::delete('dashboard', 'AdminController@revokeAdmin');
+	});
 
 });
